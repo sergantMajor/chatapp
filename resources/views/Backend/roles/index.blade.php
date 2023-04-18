@@ -21,7 +21,17 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    @foreach ( $roledetails as $data )
+
+                                    <tr>
+                                        <td>{{$data->name}}</td>
+                                        <td>{{$data->description}}</td>
+                                        <td>{{$data->created_at}}</td>
+                                        <td>{{$data->updated_at}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div><!-- /.card -->
@@ -41,7 +51,7 @@
             let table = $('#roleDatatable').DataTable({
                 "serverSide": true,
                 "ajax": {
-                    "url": BASE_URL+'/Backend/roles',
+                    "url": '{{route('roles.index')}}',
                     "dataType":"json",
                     "type":"GET",
                     "data":{"_token":CSRF_TOKEN},
@@ -83,8 +93,6 @@
                 "language": {
                     "emptyTable": " "
                 }
-            });
-
 
             $('.table-search').on( 'keyup', function () {
                 table.search( this.value ).draw();

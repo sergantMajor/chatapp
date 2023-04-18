@@ -64,7 +64,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('roles.index')}}" class="nav-link">
+                    <a href="{{url('admin/roleslist')}}" class="nav-link">
                         <i class="fas fa-list nav-icon"></i>
                         <p>Role List</p>
                     </a>

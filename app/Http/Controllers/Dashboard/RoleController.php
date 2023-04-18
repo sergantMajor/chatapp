@@ -11,12 +11,9 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-
             $columns = array(
                 0 => 'name',
-
                 1 => 'description',
-
                 2 => 'created_at',
                 3 => 'action',
             );
@@ -36,13 +33,13 @@ class RoleController extends Controller
 
                     'r.created_at',
                 );
-            $query->where(function($q) use($search){
-                $q->where('r.name', 'like', $search . '%')
 
-                    ->orWhere('r.description', 'like', $search . '%')
+                $query->where('r.name', 'like', $search . '%')
 
-                    ->orWhere('r.created_at', 'like', $search . '%');
-            });
+                    ->orWhere('r.description', 'like', $search . '%');
+
+
+
 
             $totalData = $query->count();
             $query->orderBy($order, $dir);
@@ -50,6 +47,7 @@ class RoleController extends Controller
                 $query->offset($start)->limit($limit);
             }
             $records = $query->get();
+            dd($records);
             $totalFiltered = $totalData;
             $data = array();
             if (isset($records)) {
@@ -144,6 +142,11 @@ class RoleController extends Controller
         return response()->json([
             'message' => 'Role Successfully Deleted',
         ], 200);
+    }
+    function display()
+    {
+        $roledetails=Role::all();
+        return view('Backend.roles.index',compact('roledetails'));
     }
 }
 

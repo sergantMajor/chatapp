@@ -22,4 +22,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('roles', App\Http\Controllers\Dashboard\RoleController::class);
+Route::resource('roles', [App\Http\Controllers\Dashboard\RoleController::class]);
+
+Route::get('admin/roleslist', [RoleController::class, 'display']);
